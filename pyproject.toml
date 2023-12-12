@@ -35,3 +35,19 @@ dev-dependencies = [
 
 [tool.hatch.metadata]
 allow-direct-references = true
+
+[tool.black]
+line-length = 79
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[tool.ruff]
+select = [
+	"F", # pyflakes
+	"E", # pycodestyle
+	"W", # pycodestyle warnings
+	"I", # isort
+]
+ignore = []
+line-length = 79
