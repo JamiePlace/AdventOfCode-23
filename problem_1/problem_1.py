@@ -1,6 +1,5 @@
 import re
 from pathlib import Path
-import numpy as np
 import math
 
 valid_keys = {
