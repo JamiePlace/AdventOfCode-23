@@ -2,7 +2,6 @@ from pathlib import Path
 import math
 
 
-
 max_allowable = {"red": 12, "green": 13, "blue": 14}
 
 
