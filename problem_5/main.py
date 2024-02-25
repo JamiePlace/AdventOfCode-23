@@ -15,9 +15,7 @@ def parse_file(file):
     key = ""
     for i, line in enumerate(file.split("\n")):
         if i == 0:
-            output["seeds"] = list(
-                map(int, line.split(":")[1].strip().split(" "))
-            )
+            output["seeds"] = list( map(int, line.split(":")[1].strip().split(" ")))
             continue
         if ":" in line:
             key = line.split(":")[0].split(" ")[0]
@@ -39,7 +37,7 @@ def convert_seeds_part2(seeds):
         if i % 2 == 0:
             start_seed = seed
         else:
-            seed_output.extend(list(range(start_seed, start_seed + seed)))
+            seed_output.extend(list(range(start_seed, start_seed + seed))) # type: ignore
     return seed_output
 
 
@@ -47,22 +45,11 @@ def seed_to_location(seed, maps):
     source = seed
     keys = list(maps.keys())[1:]
     destination = -1
-    for i, key in enumerate(keys):
+    for _, key in enumerate(keys):
         for j in range(len(maps[key]["source"])):
-            if (
-                maps[key]["source"][j]
-                <= source
-                < maps[key]["source"][j] + maps[key]["range"][j]
-            ):
-                source_id = (
-                    maps[key]["source"][j] + maps[key]["range"][j] - 1 - source
-                )
-                destination = (
-                    maps[key]["destination"][j]
-                    + maps[key]["range"][j]
-                    - 1
-                    - source_id
-                )
+            if maps[key]["source"][j] <= source < maps[key]["source"][j] + maps[key]["range"][j]:
+                source_id = maps[key]["source"][j] + maps[key]["range"][j] - 1 - source
+                destination = maps[key]["destination"][j] + maps[key]["range"][j] - 1 - source_id
         if destination == -1:
             destination = source
         source = destination
@@ -74,6 +61,7 @@ def part1(file, part2=False):
     seed_to_location_map = {}
     if part2:
         for seed, _range in zip(maps["seeds"][::2], maps["seeds"][1::2]):
+            print(_range)
             for seed in range(seed, seed + _range):
                 seed_to_location_map[seed] = seed_to_location(seed, maps)
 
